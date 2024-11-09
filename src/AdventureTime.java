@@ -74,62 +74,54 @@ public class AdventureTime {
         int horizontalPosition = 0;
         int depth = 0;
 
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(" ");
-                String command = parts[0];
-                int value = Integer.parseInt(parts[1]);
+        Scanner scanner = new Scanner(new File(fileName));
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(" ");
+            String command = parts[0];
+            int value = Integer.parseInt(parts[1]);
 
-                switch (command) {
-                    case "forward":
-                        horizontalPosition += value;
-                        break;
-                    case "down":
-                        depth += value;
-                        break;
-                    case "up":
-                        depth -= value;
-                        break;
-                }
+            if (command.equals("forward")) {
+                horizontalPosition += value;
+            } else if (command.equals("down")) {
+                depth += value;
+            } else if (command.equals("up")) {
+                depth -= value;
             }
         }
+        scanner.close();
         return horizontalPosition * depth;
     }
 
     /**
      * Challenge 4
      *
-     * @param filename
+     * @param fileName
      * @return Answer to Challenge 4
      * @throws FileNotFoundException
      */
-    public static int challengeFour(String filename) throws FileNotFoundException {
+    public static int challengeFour(String fileName) throws FileNotFoundException {
         int horizontalPosition = 0;
         int depth = 0;
         int aim = 0;
 
-        try (Scanner scanner = new Scanner(new File(filename))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(" ");
-                String command = parts[0];
-                int value = Integer.parseInt(parts[1]);
+        Scanner scanner = new Scanner(new File(fileName));
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(" ");
+            String command = parts[0];
+            int value = Integer.parseInt(parts[1]);
 
-                switch (command) {
-                    case "forward":
-                        horizontalPosition += value;
-                        depth += aim * value;
-                        break;
-                    case "down":
-                        aim += value;
-                        break;
-                    case "up":
-                        aim -= value;
-                        break;
-                }
+            if (command.equals("forward")) {
+                horizontalPosition += value;
+                depth += aim * value;
+            } else if (command.equals("down")) {
+                aim += value;
+            } else if (command.equals("up")) {
+                aim -= value;
             }
         }
+        scanner.close();
         return horizontalPosition * depth;
     }
 
